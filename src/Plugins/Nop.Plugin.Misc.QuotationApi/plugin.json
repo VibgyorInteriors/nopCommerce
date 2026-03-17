@@ -1,0 +1,12 @@
+{
+  "Group": "Misc",
+  "FriendlyName": "Quotation API for Angular",
+  "SystemName": "Misc.QuotationApi",
+  "Version": "5.00.1",
+  "SupportedVersions": [ "5.00" ],
+  "Author": "Vibgyor",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.Misc.QuotationApi.dll",
+  "Description": "RESTful Web API for Angular quotation application. Provides endpoints for products, discounts, and quotations."
+}
+

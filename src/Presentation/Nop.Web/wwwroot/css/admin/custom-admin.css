@@ -1,0 +1,290 @@
+/**
+ * Custom Admin UI Styles for Vibgyor
+ * This file customizes the nopCommerce admin panel UI
+ * Safe for updates - doesn't modify core files
+ */
+
+/* ============================================
+   ADMIN HEADER CUSTOMIZATION
+   ============================================ */
+.main-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand,
+.brand-link {
+    font-weight: 600;
+    color: #fff !important;
+}
+
+/* ============================================
+   SIDEBAR CUSTOMIZATION
+   ============================================ */
+.main-sidebar {
+    background: linear-gradient(180deg, #2c3e50 0%, #1a252f 100%) !important;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Sidebar Logo Customization */
+.brand-link {
+    background: rgba(102, 126, 234, 0.1) !important;
+    border-bottom: 2px solid rgba(102, 126, 234, 0.3) !important;
+    padding: 15px !important;
+    transition: all 0.3s ease;
+}
+
+.brand-link:hover {
+    background: rgba(102, 126, 234, 0.2) !important;
+    border-bottom-color: #667eea !important;
+}
+
+.brand-link img {
+    filter: brightness(1.1);
+    transition: transform 0.3s ease;
+    max-width: 100%;
+    height: auto;
+}
+
+.brand-link:hover img {
+    transform: scale(1.05);
+}
+
+/* Ensure logo displays properly */
+.brand-image-xl,
+.brand-image-xs {
+    display: block !important;
+    margin: 0 auto;
+}
+
+/* Sidebar Menu Items */
+.sidebar-menu > li > a {
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+}
+
+.sidebar-menu > li > a:hover {
+    background: linear-gradient(90deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.1) 100%) !important;
+    border-left: 3px solid #667eea !important;
+    color: #fff !important;
+}
+
+.sidebar-menu > li.active > a {
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%) !important;
+    border-left: 3px solid #fff !important;
+    color: #fff !important;
+    box-shadow: 0 2px 5px rgba(102, 126, 234, 0.3);
+}
+
+/* Sidebar Search Box */
+.sidebar-form {
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(102, 126, 234, 0.3);
+}
+
+.sidebar-form .form-control {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    color: #fff;
+    border-radius: 20px;
+}
+
+.sidebar-form .form-control:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+.sidebar-form .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* ============================================
+   BUTTONS & ACTIONS
+   ============================================ */
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(102, 126, 234, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(102, 126, 234, 0.4);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    border: none;
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+    border: none;
+}
+
+/* ============================================
+   CARDS & BOXES
+   ============================================ */
+.card,
+.box {
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.3s ease;
+}
+
+.card:hover,
+.box:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.card-header {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border-bottom: 2px solid #667eea;
+    font-weight: 600;
+}
+
+/* ============================================
+   TABLES
+   ============================================ */
+.table {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table thead {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+}
+
+.table tbody tr:hover {
+    background-color: #f8f9fa;
+    transition: background-color 0.2s ease;
+}
+
+/* ============================================
+   FORMS
+   ============================================ */
+.form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+.form-group label {
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+/* ============================================
+   MODALS
+   ============================================ */
+.modal-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    border-radius: 8px 8px 0 0;
+}
+
+.modal-content {
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================
+   ALERTS & NOTIFICATIONS
+   ============================================ */
+.alert {
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    color: #fff;
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+    color: #fff;
+}
+
+.alert-info {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+}
+
+/* ============================================
+   DATA TABLES ENHANCEMENT
+   ============================================ */
+.dataTables_wrapper {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.dataTables_filter input {
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    padding: 8px 15px;
+}
+
+.dataTables_filter input:focus {
+    border-color: #667eea;
+    outline: none;
+}
+
+/* ============================================
+   RESPONSIVE IMPROVEMENTS
+   ============================================ */
+@media (max-width: 768px) {
+    .main-header {
+        padding: 10px;
+    }
+    
+    .sidebar {
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card,
+.box,
+.table {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+.gradient-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+}
+
+.shadow-sm {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.shadow-md {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+}
+
+.rounded-lg {
+    border-radius: 12px;
+}
+
