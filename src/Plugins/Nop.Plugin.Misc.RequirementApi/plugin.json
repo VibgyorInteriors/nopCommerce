@@ -1,0 +1,12 @@
+{
+  "Group": "Misc",
+  "FriendlyName": "Product API",
+  "SystemName": "Misc.RequirementApi",
+  "Version": "5.00.1",
+  "SupportedVersions": [ "5.00" ],
+  "Author": "Vibgyor",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.Misc.RequirementApi.dll",
+  "Description": "RESTful Web API for retrieving product details. Provides endpoints to get all products and product details by ID."
+}
+

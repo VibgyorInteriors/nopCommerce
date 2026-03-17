@@ -1,4 +1,4 @@
-﻿using Autofac.Extensions.DependencyInjection;
+using Autofac.Extensions.DependencyInjection;
 using Nop.Core.Configuration;
 using Nop.Core.Infrastructure;
 using Nop.Web.Framework.Infrastructure.Extensions;
@@ -18,6 +18,17 @@ public partial class Program
             builder.Configuration.AddJsonFile(path, true, true);
         }
         builder.Configuration.AddEnvironmentVariables();
+
+        // Configure Kestrel to listen on an additional port for API (default: 5001)
+        // This allows the API/Swagger to be accessed on a separate port
+        var apiPort = builder.Configuration.GetValue<int>("RequirementApi:Port", 5001);
+        builder.WebHost.ConfigureKestrel(options =>
+        {
+            options.ListenLocalhost(apiPort, listenOptions =>
+            {
+                listenOptions.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http1AndHttp2;
+            });
+        });
 
         //load application settings
         builder.Services.ConfigureApplicationSettings(builder);

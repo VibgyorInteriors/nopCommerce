@@ -1,0 +1,298 @@
+/**
+ * Vibgyor Theme Custom Styles
+ * This file contains custom styling improvements for Vibgyor Colour & Decor Specialists
+ * These styles enhance the UI without modifying core nopCommerce files
+ */
+
+/* ============================================
+   LOGO STYLING
+   ============================================ */
+.vibgyor-logo-link {
+    display: inline-block;
+    text-decoration: none;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.vibgyor-logo-link:hover {
+    transform: scale(1.02);
+    opacity: 0.9;
+}
+
+.vibgyor-logo {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
+/* Ensure logo container has proper spacing */
+.header-logo {
+    padding: 15px 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* ============================================
+   HEADER IMPROVEMENTS
+   ============================================ */
+.header {
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.header-upper {
+    background: #f8f8f8;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.header-lower {
+    padding: 20px 0;
+    background: #ffffff;
+}
+
+/* ============================================
+   BUTTON IMPROVEMENTS
+   ============================================ */
+.button-1, 
+.button-2,
+input[type="button"],
+input[type="submit"],
+button.btn-primary {
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    font-weight: 500;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.button-1:hover,
+.button-2:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+button.btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================
+   PRODUCT CARDS & CATALOG
+   ============================================ */
+.product-item {
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.product-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+.product-item .picture {
+    overflow: hidden;
+}
+
+.product-item .picture img {
+    transition: transform 0.3s ease;
+}
+
+.product-item:hover .picture img {
+    transform: scale(1.05);
+}
+
+/* ============================================
+   FORM IMPROVEMENTS
+   ============================================ */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+textarea,
+select {
+    border-radius: 4px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #ddd;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+    border-color: #4ab2f1;
+    box-shadow: 0 0 0 3px rgba(74, 178, 241, 0.1);
+    outline: none;
+}
+
+/* ============================================
+   NAVIGATION IMPROVEMENTS
+   ============================================ */
+.top-menu,
+.header-menu {
+    background: #ffffff;
+}
+
+.top-menu ul li a,
+.header-menu ul li a {
+    transition: color 0.3s ease, background-color 0.3s ease;
+    padding: 10px 15px;
+    border-radius: 4px;
+}
+
+.top-menu ul li a:hover,
+.header-menu ul li a:hover {
+    background-color: #f5f5f5;
+    color: #4ab2f1;
+}
+
+/* ============================================
+   SEARCH BOX IMPROVEMENTS
+   ============================================ */
+.search-box {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.search-box input[type="text"] {
+    border-radius: 8px 0 0 8px;
+}
+
+.search-box button {
+    border-radius: 0 8px 8px 0;
+}
+
+/* ============================================
+   CARD & BOX IMPROVEMENTS
+   ============================================ */
+.block,
+.box {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.3s ease;
+}
+
+.block:hover,
+.box:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.block-title,
+.box-title {
+    font-weight: 600;
+    color: #333;
+    padding: 15px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+/* ============================================
+   COLOR ACCENTS (VIBGYOR COLORS)
+   ============================================ */
+:root {
+    --vibgyor-violet: #9400D3;
+    --vibgyor-indigo: #4B0082;
+    --vibgyor-blue: #0000FF;
+    --vibgyor-green: #00FF00;
+    --vibgyor-yellow: #FFFF00;
+    --vibgyor-orange: #FF7F00;
+    --vibgyor-red: #FF0000;
+}
+
+/* Use vibgyor colors for accents */
+.accent-color {
+    color: var(--vibgyor-blue);
+}
+
+.accent-bg {
+    background-color: var(--vibgyor-blue);
+}
+
+/* ============================================
+   RESPONSIVE IMPROVEMENTS
+   ============================================ */
+@media (max-width: 768px) {
+    .header-logo {
+        padding: 10px 0;
+        justify-content: center;
+    }
+    
+    .vibgyor-logo {
+        max-height: 60px;
+    }
+    
+    .product-item {
+        margin-bottom: 20px;
+    }
+}
+
+@media (min-width: 769px) {
+    .vibgyor-logo {
+        max-height: 80px;
+    }
+}
+
+/* ============================================
+   FOOTER IMPROVEMENTS
+   ============================================ */
+.footer {
+    background: #2c3e50;
+    color: #ecf0f1;
+    padding: 40px 0 20px;
+    margin-top: 50px;
+}
+
+.footer a {
+    color: #ecf0f1;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: #4ab2f1;
+}
+
+/* ============================================
+   LOADING & ANIMATIONS
+   ============================================ */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.product-item,
+.block,
+.box {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+.shadow-sm {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.shadow-md {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+}
+
+.shadow-lg {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.16);
+}
+
+.rounded {
+    border-radius: 8px;
+}
+
+.transition {
+    transition: all 0.3s ease;
+}
+
