@@ -1034,6 +1034,19 @@ label, label + * {
   background: #fff url('../images/ajax-loader-small.gif') left center no-repeat;
 }
 
+.search-box-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.search-box-item .search-box-remove {
+  padding: 15px;
+}
+
+.search-box-item .search-box-link {
+  flex-grow: 1;
+}
+
 .ui-helper-hidden-accessible {
   display: none !important;
 }
@@ -1171,6 +1184,22 @@ label, label + * {
 
 .follow-us .social .instagram a {
   background-position: -152px 0;
+}
+
+.follow-us .social .tiktok a {
+  background-position: -190px 0;
+}
+
+.follow-us .social .snapchat a {
+  background-position: -228px 0;
+}
+
+.follow-us .social .pinterest a {
+  background-position: -266px 0;
+}
+
+.follow-us .social .tumblr a {
+  background-position: -304px 0;
 }
 
 .newsletter-email {
@@ -6001,13 +6030,6 @@ label, label + * {
   margin: 20px 0;
 }
 
-.private-message-send-page .bb-code-editor-wrapper {
-  max-width: 400px;
-  margin: 20px auto;
-  background-color: #ddd;
-  padding: 10px;
-}
-
 .private-message-send-page .toolbar .button {
   margin: 0 0 0 2px;
   border: #cec6b5 1px solid;
@@ -7738,7 +7760,7 @@ label, label + * {
   /*** FOOTER ***/
 
   .follow-us .social li {
-    margin: 0 0 0 10px;
+    margin: 0 0 10px 10px;
   }
 
   .newsletter-email {
@@ -8147,20 +8169,6 @@ label, label + * {
   .private-message-send-page textarea {
     width: 600px;
     height: 250px;
-  }
-
-  .private-message-send-page .bb-code-editor-wrapper {
-    display: inline-block;
-    width: 400px;
-    margin: 10px 0;
-    vertical-align: middle;
-  }
-
-  .private-message-send-page .bb-code-editor-wrapper {
-    display: inline-block;
-    width: 400px;
-    margin: 10px 0;
-    vertical-align: middle;
   }
 }
 

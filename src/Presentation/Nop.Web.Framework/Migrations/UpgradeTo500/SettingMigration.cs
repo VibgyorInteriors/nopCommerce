@@ -4,6 +4,7 @@ using Nop.Core.Domain.ArtificialIntelligence;
 using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Common;
 using Nop.Core.Domain.Customers;
+using Nop.Core.Domain.Reminders;
 using Nop.Core.Domain.Shipping;
 using Nop.Data;
 using Nop.Data.Migrations;
@@ -62,6 +63,22 @@ public class SettingMigration : MigrationBase
             }
             this.DeleteSettingsByNames(["storeinformationsettings.twitterlink"]);
         });
+
+        //#8136
+        this.SetSettingIfNotExists<StoreInformationSettings, string>(settings => settings.TikTokLink, string.Empty);
+        this.SetSettingIfNotExists<StoreInformationSettings, string>(settings => settings.SnapchatLink, string.Empty);
+        this.SetSettingIfNotExists<StoreInformationSettings, string>(settings => settings.PinterestLink, string.Empty);
+        this.SetSettingIfNotExists<StoreInformationSettings, string>(settings => settings.TumblrLink, string.Empty);
+
+        //#8069
+        this.SetSettingIfNotExists<CatalogSettings, bool>(settings => settings.ShowSearchTermHistory, true);
+        this.SetSettingIfNotExists<CatalogSettings, int>(settings => settings.NumberOfSearchTermHistoryItems, 10);
+
+        //#7743
+        this.SetSettingIfNotExists<ReminderSettings, bool>(settings => settings.AbandonedCartEnabled, false);
+        this.SetSettingIfNotExists<ReminderSettings, bool>(settings => settings.PendingOrdersEnabled, false);
+        this.SetSettingIfNotExists<ReminderSettings, bool>(settings => settings.IncompleteRegistrationEnabled, false);
+        this.SetSettingIfNotExists<ReminderSettings, DateTime?>(settings => settings.ProcessingStartDateUtc, DateTime.UtcNow);
     }
 
     public override void Down()

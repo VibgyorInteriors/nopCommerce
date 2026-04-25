@@ -407,6 +407,8 @@ public partial class AdminMapperConfiguration : Profile, IOrderedMapperProfile
             .ForMember(model => model.AllowCustomersToSearchWithCategoryName_OverrideForStore, options => options.Ignore())
             .ForMember(model => model.DisplayAllPicturesOnCatalogPages_OverrideForStore, options => options.Ignore())
             .ForMember(model => model.ProductUrlStructureTypeId_OverrideForStore, mo => mo.Ignore())
+            .ForMember(model => model.ShowSearchTermHistory_OverrideForStore, mo => mo.Ignore())
+            .ForMember(model => model.NumberOfSearchTermHistoryItems_OverrideForStore, mo => mo.Ignore())
             .ForMember(model => model.ProductUrlStructureTypes, mo => mo.Ignore())
             .ForMember(model => model.ShowSearchBoxCategories_OverrideForStore, mo => mo.Ignore())
             .ForMember(model => model.ArtificialIntelligenceSettingsModel, mo => mo.Ignore())
@@ -931,7 +933,11 @@ public partial class AdminMapperConfiguration : Profile, IOrderedMapperProfile
             .ForMember(entity => entity.TaxDisplayTypeId, options => options.Ignore())
             .ForMember(entity => entity.VatNumberStatus, options => options.Ignore())
             .ForMember(entity => entity.TaxDisplayType, options => options.Ignore())
-            .ForMember(entity => entity.RegisteredInStoreId, options => options.Ignore());
+            .ForMember(entity => entity.RegisteredInStoreId, options => options.Ignore())
+            .ForMember(entity => entity.LastShoppingCartUpdateDateUtc, options => options.Ignore())
+            .ForMember(entity => entity.RegistrationFollowUpDateUtc, options => options.Ignore())
+            .ForMember(entity => entity.LastAbandonedCartFollowUpDateUtc, options => options.Ignore())
+            .ForMember(entity => entity.LastAbandonedCartFollowUpNumber, options => options.Ignore());
 
         CreateMap<Customer, OnlineCustomerModel>()
             .ForMember(model => model.LastActivityDate, options => options.Ignore())
