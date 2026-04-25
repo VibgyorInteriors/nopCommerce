@@ -1,0 +1,133 @@
+@{
+    Layout = "_AdminLayout";
+    ViewBag.PageTitle = "Bulk Image Upload";
+    NopHtml.SetActiveMenuItemSystemName("Vibgyor.BulkImageUpload");
+}
+@Html.AntiForgeryToken()
+
+<div class="content-header clearfix">
+    <h1 class="float-left">Bulk Image Upload</h1>
+</div>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="form-horizontal">
+            <div class="cards-group">
+                <div class="card card-default">
+                    <div class="card-body">
+                        <p>
+                            Create a ZIP archive containing product images. Each file name (without extension) must match a product name exactly (case does not matter), for example
+                            <code>Asian Paints Wall Putty.jpg</code> for a product named <strong>Asian Paints Wall Putty</strong>.
+                        </p>
+                        <p class="text-muted">
+                            Supported image types: JPG, PNG, GIF, BMP, WebP, TIFF. Nested folders inside the ZIP are allowed.
+                        </p>
+
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <label class="control-label" for="zipFile">ZIP file</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="file" id="zipFile" name="zipFile" accept=".zip,application/zip" class="form-control-file" />
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-9 offset-md-3">
+                                <button type="button" id="uploadBtn" class="btn btn-primary">Upload</button>
+                            </div>
+                        </div>
+
+                        <div id="progressWrap" class="form-group row" style="display:none;">
+                            <div class="col-md-9 offset-md-3">
+                                <div class="progress">
+                                    <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%;">Uploading…</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="summary" class="alert" style="display:none;"></div>
+                        <ul id="resultList" class="list-unstyled" style="display:none;"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script asp-location="Footer">
+    (function () {
+        var uploadUrl = '@Url.Action("Upload", "BulkImageUpload", new { area = AreaNames.ADMIN })';
+
+        var zipInput = document.getElementById('zipFile');
+        var uploadBtn = document.getElementById('uploadBtn');
+        var progressWrap = document.getElementById('progressWrap');
+        var summary = document.getElementById('summary');
+        var resultList = document.getElementById('resultList');
+
+        uploadBtn.addEventListener('click', function () {
+            summary.style.display = 'none';
+            resultList.style.display = 'none';
+            resultList.innerHTML = '';
+
+            if (!zipInput.files || zipInput.files.length === 0) {
+                alert('Please choose a ZIP file.');
+                return;
+            }
+
+            var file = zipInput.files[0];
+            if (!file.name.toLowerCase().endsWith('.zip')) {
+                alert('Only .zip files are allowed.');
+                return;
+            }
+
+            var formData = new FormData();
+            formData.append('zipFile', file);
+            var token = document.querySelector('input[name="__RequestVerificationToken"]');
+            if (token) formData.append('__RequestVerificationToken', token.value);
+
+            progressWrap.style.display = '';
+            uploadBtn.disabled = true;
+
+            fetch(uploadUrl, {
+                method: 'POST',
+                body: formData,
+                credentials: 'same-origin'
+            })
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    uploadBtn.disabled = false;
+                    progressWrap.style.display = 'none';
+
+                    if (data.error) {
+                        summary.className = 'alert alert-danger';
+                        summary.textContent = data.error;
+                        summary.style.display = '';
+                        return;
+                    }
+
+                    summary.className = 'alert alert-success';
+                    summary.textContent = 'Done! ' + data.successCount + ' succeeded, ' + data.failCount + ' failed.';
+                    summary.style.display = '';
+
+                    if (data.items && data.items.length) {
+                        resultList.style.display = '';
+                        data.items.forEach(function (item) {
+                            var li = document.createElement('li');
+                            li.textContent = (item.success ? '✅ ' : '❌ ') + item.fileName + ' — ' + (item.message || '');
+                            resultList.appendChild(li);
+                        });
+                    }
+                })
+                .catch(function () {
+                    uploadBtn.disabled = false;
+                    progressWrap.style.display = 'none';
+                    summary.className = 'alert alert-danger';
+                    summary.textContent = 'Upload failed (network error).';
+                    summary.style.display = '';
+                });
+        });
+    })();
+</script>

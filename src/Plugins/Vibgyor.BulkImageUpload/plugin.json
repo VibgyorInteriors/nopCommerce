@@ -1,0 +1,11 @@
+{
+  "Group": "Vibgyor",
+  "FriendlyName": "Bulk Image Upload",
+  "SystemName": "Vibgyor.BulkImageUpload",
+  "Version": "1.00",
+  "SupportedVersions": [ "5.00" ],
+  "Author": "Vibgyor",
+  "DisplayOrder": 1,
+  "FileName": "Vibgyor.BulkImageUpload.dll",
+  "Description": "Upload a ZIP of product images named after product names and assign them in bulk."
+}

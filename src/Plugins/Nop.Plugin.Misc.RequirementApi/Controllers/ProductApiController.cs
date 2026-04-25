@@ -7,6 +7,7 @@ using Nop.Core.Domain.Discounts;
 using Nop.Services.Catalog;
 using Nop.Services.Customers;
 using Nop.Services.Discounts;
+using Nop.Services.Localization;
 using Nop.Services.Media;
 using Nop.Web.Framework.Controllers;
 
@@ -31,6 +32,7 @@ public class ProductApiController : BasePluginController
     protected readonly IProductAttributeService _productAttributeService;
     protected readonly ISpecificationAttributeService _specificationAttributeService;
     protected readonly IProductTagService _productTagService;
+    protected readonly ILocalizationService _localizationService;
     protected readonly IWorkContext _workContext;
     protected readonly ICustomerService _customerService;
 
@@ -47,6 +49,7 @@ public class ProductApiController : BasePluginController
         IProductAttributeService productAttributeService,
         ISpecificationAttributeService specificationAttributeService,
         IProductTagService productTagService,
+        ILocalizationService localizationService,
         IWorkContext workContext,
         ICustomerService customerService)
     {
@@ -58,6 +61,7 @@ public class ProductApiController : BasePluginController
         _productAttributeService = productAttributeService;
         _specificationAttributeService = specificationAttributeService;
         _productTagService = productTagService;
+        _localizationService = localizationService;
         _workContext = workContext;
         _customerService = customerService;
     }
@@ -123,6 +127,8 @@ public class ProductApiController : BasePluginController
             // Get product tags
             var productTags = await _productTagService.GetAllProductTagsByProductIdAsync(product.Id);
             var productTagNames = productTags.Select(pt => pt.Name).ToList();
+            var metaTitle = await _localizationService.GetLocalizedAsync(product, x => x.MetaTitle);
+            var metaKeywords = await _localizationService.GetLocalizedAsync(product, x => x.MetaKeywords);
 
             // Get related products
             var relatedProducts = await _productService.GetRelatedProductsByProductId1Async(product.Id, showHidden);
@@ -317,6 +323,8 @@ public class ProductApiController : BasePluginController
             {
                 id = product.Id,
                 name = product.Name,
+                metaTitle = metaTitle,
+                metaKeywords = metaKeywords,
                 shortDescription = product.ShortDescription,
                 fullDescription = product.FullDescription,
                 sku = product.Sku,
@@ -562,10 +570,15 @@ public class ProductApiController : BasePluginController
             }
         }
 
+        var metaTitle = await _localizationService.GetLocalizedAsync(product, x => x.MetaTitle);
+        var metaKeywords = await _localizationService.GetLocalizedAsync(product, x => x.MetaKeywords);
+
         var result = new
         {
             id = product.Id,
             name = product.Name,
+            metaTitle = metaTitle,
+            metaKeywords = metaKeywords,
             shortDescription = product.ShortDescription,
             fullDescription = product.FullDescription,
             adminComment = product.AdminComment,
