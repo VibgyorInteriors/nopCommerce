@@ -19,6 +19,12 @@ namespace Nop.Plugin.Misc.QuotationApi.Controllers;
 [AutoValidateAntiforgeryToken]
 public class QuotationApiController : BasePluginController
 {
+    /// <summary>Default batch size when the client omits <c>pageSize</c> (avoid loading the entire catalog at once).</summary>
+    private const int DefaultProductPageSize = 50;
+
+    /// <summary>Upper bound per request to keep payloads and DB work predictable.</summary>
+    private const int MaxProductPageSize = 500;
+
     #region Fields
 
     protected readonly IProductService _productService;
@@ -44,13 +50,20 @@ public class QuotationApiController : BasePluginController
     #region Products
 
     /// <summary>
-    /// Get all products (for quotation selection)
-    /// GET /api/quotation/products
+    /// Get products in batches for quotation selection. Call repeatedly with increasing <paramref name="pageIndex"/> until <c>hasNextPage</c> is false.
+    /// GET /api/quotation/products?pageIndex=0&amp;pageSize=50
     /// </summary>
     [HttpGet("products")]
     [CheckPermission(StandardPermission.Catalog.PRODUCTS_VIEW)]
-    public virtual async Task<IActionResult> GetProducts([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = int.MaxValue)
+    public virtual async Task<IActionResult> GetProducts([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = DefaultProductPageSize)
     {
+        if (pageIndex < 0)
+            pageIndex = 0;
+        if (pageSize < 1)
+            pageSize = DefaultProductPageSize;
+        else if (pageSize > MaxProductPageSize)
+            pageSize = MaxProductPageSize;
+
         var products = await _productService.SearchProductsAsync(
             pageIndex: pageIndex,
             pageSize: pageSize,
@@ -69,12 +82,25 @@ public class QuotationApiController : BasePluginController
             manageInventoryMethod = p.ManageInventoryMethod.ToString()
         }).ToList();
 
+        var totalCount = products.TotalCount;
+        var totalPages = pageSize > 0 ? (int)Math.Ceiling(totalCount / (double)pageSize) : 0;
+        var loadedThroughCount = Math.Min(pageIndex * pageSize + result.Count, totalCount);
+
         return Json(new
         {
             data = result,
-            totalCount = products.TotalCount,
-            pageIndex = pageIndex,
-            pageSize = pageSize
+            totalCount,
+            pageIndex,
+            pageSize,
+            totalPages,
+            batchIndex = pageIndex,
+            batchNumber = totalPages == 0 ? 0 : pageIndex + 1,
+            batchCount = totalPages,
+            batchItemCount = result.Count,
+            hasNextPage = totalPages > 0 && pageIndex + 1 < totalPages,
+            hasPreviousPage = pageIndex > 0 && totalCount > 0,
+            loadedThroughCount,
+            progressPercent = totalCount == 0 ? 100m : Math.Round(100m * loadedThroughCount / totalCount, 2)
         });
     }
 
